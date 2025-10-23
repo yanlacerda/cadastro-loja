@@ -92,3 +92,13 @@ class PedidoItem(Base):
         Base.metadata.create_all(engine)
         SessionLocal= sessionmaker(bind=engine, autoflush=False, autocomit=False, future=True)
         return SessionLocal()
+    from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
+
+Base = declarative_base()
+
+def create_session(db_url):
+    engine = create_engine(db_url, echo=False)
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    return Session()
